@@ -1,8 +1,15 @@
 "use client"
 import React, { useState, useRef, useEffect } from "react";
-import { FaUserCircle, FaBell, FaCog } from "react-icons/fa";
+import { FaUserCircle, FaBell } from "react-icons/fa";
+import Image from "next/image";
+import cartIcon from "../public/assets/cart_icon.svg";
+import Link from "next/link";
 
-const TopHeader = () => {
+interface TopHeaderProps {
+  cartCount?: number;
+}
+
+const TopHeader: React.FC<TopHeaderProps> = ({ cartCount = 0 }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
 
@@ -91,9 +98,14 @@ const TopHeader = () => {
             </div>
           )}
         </div>
-        <button className="text-gray-700 hover:bg-[#ff2c2c34] w-[30px] h-[30px] flex items-center justify-center rounded">
-          <FaCog size={22} />
-        </button>
+        <Link href="/cart" className="relative text-gray-700 hover:bg-[#ff2c2c34] w-[36px] h-[36px] flex items-center justify-center rounded">
+          <Image src={cartIcon} alt="Cart" width={24} height={24} />
+          {cartCount > 0 && (
+            <span className="absolute -top-1 -right-1 bg-[#ff2c2c] text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
+              {cartCount}
+            </span>
+          )}
+        </Link>
       </div>
     </header>
   );

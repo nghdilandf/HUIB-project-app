@@ -35,7 +35,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
       {paginatedProducts.map((product: any) => (
         <div
           key={product.id}
-          className="bg-white rounded-lg border-2 p-4 flex flex-col items-center w-64 mb-4"
+          className="bg-white rounded-lg border-2 border-gray-100 p-4 flex flex-col items-center w-64 mb-4"
         >
           <Image
             src={product.image}

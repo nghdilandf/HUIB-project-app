@@ -9,7 +9,7 @@ const menuItems = [
   { name: "Food Order", icon: <FaUtensils />, to: "/food-order" },
   { name: "Feedback", icon: <FaCommentDots />, to: "/feedback" },
   { name: "Messages", icon: <FaEnvelope />, to: "/messages" },
-  { name: "Order History", icon: <FaHistory />, to: "/order-history" },
+  { name: "Payment History", icon: <FaHistory />, to: "/payment-history" },
   { name: "Analysis", icon: <FaChartBar />, to: "/analysis" },
   { name: "Costomization", icon: <FaTools />, to: "/costomization" },
 ];
