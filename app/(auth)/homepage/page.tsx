@@ -1,58 +1,57 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import TopHeader from '@/components/TopHeader';
 import Image from 'next/image';
-import { products } from '../../../public/assets/assets';
-
-const categories = [
-  'all', 'donuts', 'burgers', 'ice', 'poteto', 'pizza', 'fries', 'cake', 'chicken', 'hot dog'
-];
+import UserHeader from '@/components/UserHeader';
+import Footer from '@/components/Footer';
 
 const ClientHome = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [page, setPage] = useState(0);
-  const ITEMS_PER_PAGE = 12;
-  const [loved, setLoved] = useState<{ [id: string]: boolean }>({});
-  const [cart, setCart] = useState<any[]>([]);
-  const [showCartPopup, setShowCartPopup] = useState(false);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  const [activeSection, setActiveSection] = useState<'home' | 'about' | 'contact'>('home');
 
-  // Filter and paginate products
-  const filteredProducts = products.filter(
-    (product: any) => selectedCategory === 'all' || product.category?.toLowerCase() === selectedCategory
-  );
-  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
-  const paginatedProducts = filteredProducts.slice(
-    page * ITEMS_PER_PAGE,
-    (page + 1) * ITEMS_PER_PAGE
-  );
-
-  // Handlers
-  const handleLove = (id: string) => {
-    setLoved(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-  const handleAdd = (product: any) => {
-    setCart(prev => {
-      const found = prev.find(item => item.product._id === product._id);
-      if (found) {
-        return prev.map(item =>
-          item.product._id === product._id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+  // Scroll to About or Contact section if triggered from header
+  useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === '#about' && aboutRef.current) {
+        aboutRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveSection('about');
+      } else if (window.location.hash === '#contact' && contactRef.current) {
+        contactRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveSection('contact');
       }
-      return [...prev, { product, quantity: 1 }];
-    });
-    setShowCartPopup(true);
-  };
-  const handleCloseCartPopup = () => setShowCartPopup(false);
+    };
+    window.addEventListener('hashchange', handleHash);
+    handleHash();
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
-  // Cart totals
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const totalCost = cart.reduce((sum, item) => sum + item.quantity * item.product.price, 0);
+  // Detect scroll to About or Contact section
+  useEffect(() => {
+    const onScroll = () => {
+      if (contactRef.current) {
+        const rect = contactRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.2) {
+          setActiveSection('contact');
+          return;
+        }
+      }
+      if (aboutRef.current) {
+        const rect = aboutRef.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.2) {
+          setActiveSection('about');
+          return;
+        }
+      }
+      setActiveSection('home');
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <TopHeader cartCount={totalItems} />
+      <UserHeader activePage={activeSection} />
       {/* Hero Section */}
       <section className="w-4/5 mx-auto bg-[#fff6f6] py-12 flex flex-col md:flex-row items-center justify-center mb-8 gap-8 md:gap-16">
         <div className="flex-1 flex flex-col items-start md:items-start justify-center max-w-xl px-4">
@@ -60,118 +59,95 @@ const ClientHome = () => {
           <p className="text-lg text-gray-700 mb-4 text-left max-w-2xl">
             Discover and order your favorite meals, snacks, and drinks from the best local restaurants. Fast delivery, great taste, and a world of options!
           </p>
+          <a href="/menu" className="inline-block bg-[#ff2c2c] text-white font-bold px-8 py-3 rounded-lg shadow hover:bg-[#e01b1b] transition text-lg mt-2">See Menu</a>
         </div>
         <div className="flex-1 flex justify-center">
           <Image src="/assets/hero_img.png" alt="Hero" width={320} height={180} className="rounded-xl shadow-lg" />
         </div>
       </section>
-      {/* Categories */}
-      <div className="w-4/5 mx-auto flex flex-wrap gap-2 justify-center mb-8">
-        {categories.map(cat => (
-          <button
-            key={cat}
-            className={`px-4 py-1 rounded-full capitalize border transition font-semibold ${selectedCategory === cat ? 'bg-[#ff2c2c] text-white border-[#ff2c2c]' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'}`}
-            onClick={() => { setSelectedCategory(cat); setPage(0); }}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-      {/* Product Grid */}
-      <div className="w-4/5 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-center px-4">
-        {paginatedProducts.map((product: any) => (
-          <div key={product._id} className="bg-white rounded-lg border-2 border-gray-100 p-4 flex flex-col items-center w-64 mb-4 shadow-sm">
-            <Image
-              src={Array.isArray(product.image) ? product.image[0] : product.image}
-              alt={product.name}
-              className="w-24 h-24 object-cover rounded mb-2"
-              width={96}
-              height={96}
-            />
-            <div className="font-semibold text-lg text-center mb-2">{product.name}</div>
-            <div className="flex w-full justify-between items-center mt-2">
-              <button
-                className={`text-2xl ${loved[product._id] ? 'text-[#ff2c2c]' : 'text-gray-400'} transition`}
-                onClick={() => handleLove(product._id)}
-                aria-label="Love"
-              >
-                ♥
-              </button>
-              <button
-                className="bg-[#ff2c2c] text-white px-4 py-1 rounded hover:bg-[#e01b1b] transition font-semibold"
-                onClick={() => handleAdd(product)}
-              >
-                Add
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-      {/* Pagination Controls */}
-      <div className="w-4/5 mx-auto flex justify-center items-center gap-4 mt-8 mb-12">
-        <button
-          onClick={() => setPage(prev => Math.max(prev - 1, 0))}
-          disabled={page === 0}
-          className="px-4 py-2 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
-        >
-          Prev
-        </button>
-        <span>Page {page + 1} of {totalPages}</span>
-        <button
-          onClick={() => setPage(prev => Math.min(prev + 1, totalPages - 1))}
-          disabled={page >= totalPages - 1}
-          className="px-4 py-2 rounded bg-gray-200 text-gray-700 disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
-      {/* Cart Popup */}
-      {showCartPopup && (
-        <div className="fixed top-0 right-0 h-full w-full md:w-[320px] bg-white shadow-2xl z-50 flex flex-col border-l border-gray-200 animate-slide-in">
-          <div className="flex justify-between items-center p-4 border-b">
-            <h3 className="text-xl font-bold text-[#ff2c2c]">Cart</h3>
-            <button onClick={handleCloseCartPopup} className="text-gray-500 text-2xl font-bold">&times;</button>
-          </div>
-          <div className="flex-1 overflow-y-auto p-4">
-            {cart.length === 0 ? (
-              <div className="text-center text-gray-400 py-12">No items in cart.</div>
-            ) : (
-              <div className="flex flex-col gap-4">
-                {cart.map(item => (
-                  <div key={item.product._id} className="flex items-center gap-4 border-b pb-2 last:border-b-0">
-                    <Image
-                      src={Array.isArray(item.product.image) ? item.product.image[0] : item.product.image}
-                      alt={item.product.name}
-                      width={48}
-                      height={48}
-                      className="rounded object-cover w-12 h-12"
-                    />
-                    <div className="flex-1">
-                      <div className="font-semibold">{item.product.name}</div>
-                      <div className="text-xs text-gray-500">Qty: {item.quantity}</div>
-                    </div>
-                    <div className="font-bold text-[#ff2c2c]">${(item.product.price * item.quantity).toFixed(2)}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="p-4 border-t flex flex-col gap-2">
-            <div className="flex justify-between text-sm">
-              <span>Total Items:</span>
-              <span className="font-semibold">{totalItems}</span>
-            </div>
-            <div className="flex justify-between text-lg font-bold">
-              <span>Total:</span>
-              <span className="text-[#ff2c2c]">${totalCost.toFixed(2)}</span>
-            </div>
-            <div className="flex gap-2 mt-4">
-              <a href="/cart" className="flex-1 bg-gray-200 text-gray-700 rounded px-4 py-2 text-center font-semibold hover:bg-gray-300 transition">View Cart</a>
-              <button className="flex-1 bg-[#ff2c2c] text-white rounded px-4 py-2 font-semibold hover:bg-[#e01b1b] transition">Checkout</button>
-            </div>
+      {/* Impact & Mission Section */}
+      <section className="w-4/5 mx-auto py-10 flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-8">
+        <div className="flex-1 flex justify-center mb-6 md:mb-0 order-2 md:order-1">
+          <Image src="/assets/story.png" alt="Our Mission & Impact" width={340} height={220} className="rounded-xl shadow-md w-full max-w-xs object-cover" />
+        </div>
+        <div className="flex-1 flex flex-col items-start justify-center px-2 order-1 md:order-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#ff2c2c] mb-4">Our Mission & Impact</h2>
+          <p className="text-gray-700 text-base md:text-lg mb-4">
+            <span className="font-semibold text-[#ff2c2c]">Resto</span> is more than just a food delivery platform—it's a movement to empower local businesses, celebrate culinary diversity, and make quality food accessible to everyone. We believe food brings people together, and our mission is to connect communities through the joy of great meals.
+          </p>
+          <ul className="list-disc pl-5 text-gray-600 text-sm md:text-base mb-4">
+            <li>Supporting local restaurants and small businesses to thrive in a digital world</li>
+            <li>Promoting healthy, diverse, and sustainable food choices</li>
+            <li>Creating job opportunities and fostering entrepreneurship in the food industry</li>
+            <li>Reducing food waste through smart logistics and partnerships</li>
+            <li>Giving back: We regularly support food banks and community initiatives</li>
+          </ul>
+          <p className="text-gray-700 text-base md:text-lg">
+            Our impact is measured not just in meals delivered, but in the positive change we help create for our partners, customers, and communities. Join us as we continue to make a difference—one order at a time.
+          </p>
+        </div>
+      </section>
+      {/* About Section */}
+      <section
+        id="about"
+        ref={aboutRef}
+        className="w-4/5 mx-auto py-10 flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-8 scroll-mt-24"
+      >
+        <div className="flex-1 flex flex-col items-start justify-center px-2 order-2 md:order-1">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#ff2c2c] mb-4">About Resto</h2>
+          <p className="text-gray-700 text-base md:text-lg mb-4">
+            <span className="font-semibold text-[#ff2c2c]">Resto</span> was founded in 2022 with a vision to revolutionize the way people experience food delivery. Our journey began with a small team of passionate foodies and tech enthusiasts who wanted to make great food accessible, fast, and enjoyable for everyone.
+          </p>
+          <p className="text-gray-700 text-base md:text-lg mb-4">
+            Since our launch, we've grown into a vibrant platform connecting thousands of customers with the best local restaurants and chefs. We believe in supporting local businesses, celebrating culinary diversity, and delivering happiness to your doorstep—one meal at a time.
+          </p>
+          <ul className="list-disc pl-5 text-gray-600 text-sm md:text-base mb-4">
+            <li>Founded in 2022, now serving a growing community of food lovers</li>
+            <li>Carefully curated partnerships with top-rated local restaurants and chefs</li>
+            <li>Lightning-fast, reliable delivery with real-time order tracking</li>
+            <li>Easy-to-use platform with secure payments and personalized recommendations</li>
+            <li>Dedicated to quality, food safety, and customer satisfaction</li>
+            <li>24/7 customer support to help you anytime</li>
+          </ul>
+          <p className="text-gray-700 text-base md:text-lg">
+            Whether you&apos;re craving comfort food, exploring new cuisines, or planning a family feast, Resto is here to make every meal memorable. Thank you for being part of our story!
+          </p>
+        </div>
+        <div className="flex-1 flex justify-center mb-6 md:mb-0 order-1 md:order-2">
+          <Image src="/assets/about_img.png" alt="About Resto" width={340} height={220} className="rounded-xl shadow-md w-full max-w-xs object-cover" />
+        </div>
+      </section>
+      {/* Contact Section */}
+      <section
+        id="contact"
+        ref={contactRef}
+        className="w-4/5 mx-auto py-10 flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-8 scroll-mt-24"
+      >
+        <div className="flex-1 flex flex-col items-start justify-center px-2 order-1 md:order-2">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#ff2c2c] mb-4">Contact Us</h2>
+          <p className="text-gray-700 text-base md:text-lg mb-4">
+            We love hearing from you! Whether you have a question, feedback, partnership inquiry, or need support, our team is here to help. Reach out to us anytime and we&apos;ll get back to you as soon as possible.
+          </p>
+          <ul className="mb-4 text-gray-700 text-base md:text-lg">
+            <li className="mb-2"><span className="font-semibold">Email:</span> <a href="mailto:support@foodie.com" className="text-[#ff2c2c] underline">support@foodie.com</a></li>
+            <li className="mb-2"><span className="font-semibold">Phone:</span> <a href="tel:+1234567890" className="text-[#ff2c2c] underline">+1 234 567 890</a></li>
+            <li className="mb-2"><span className="font-semibold">Address:</span> 123 Foodie Lane, Flavor Town, USA</li>
+            <li className="mb-2"><span className="font-semibold">Customer Support:</span> 24/7 live chat and email support</li>
+            <li className="mb-2"><span className="font-semibold">Business Inquiries:</span> <a href="mailto:partners@foodie.com" className="text-[#ff2c2c] underline">partners@foodie.com</a></li>
+          </ul>
+          <p className="text-gray-700 text-base md:text-lg">
+            You can also connect with us on social media for the latest updates, offers, and food inspiration!
+          </p>
+          <div className="flex gap-4 mt-4">
+            <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c] text-2xl">Fb</a>
+            <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c] text-2xl">Ig</a>
+            <a href="#" aria-label="Twitter" className="hover:text-[#ff2c2c] text-2xl">Tw</a>
           </div>
         </div>
-      )}
+        <div className="flex-1 flex justify-center mb-6 md:mb-0 order-2 md:order-1">
+          <Image src="/assets/contact_img.png" alt="Contact Us" width={340} height={220} className="rounded-xl shadow-md w-full max-w-xs object-cover" />
+        </div>
+      </section>
       {/* Newsletter Section */}
       <section className="w-full bg-[#fff6f6] py-10 mt-16 flex flex-col items-center">
         <h3 className="text-2xl font-bold text-[#ff2c2c] mb-2">Subscribe to our Newsletter</h3>
@@ -193,45 +169,9 @@ const ClientHome = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="w-full bg-gray-900 text-gray-200 pt-12 pb-6 mt-12">
-        <div className="w-4/5 mx-auto flex flex-col md:flex-row gap-10 md:gap-20 justify-between">
-          {/* About */}
-          <div className="flex-1 min-w-[200px]">
-            <div className="flex items-center mb-4">
-              <span className="font-bold text-2xl text-[#ff2c2c] mr-2">🍽️ RESTO</span>
-            </div>
-            <p className="text-gray-400 mb-4">Foodie is your go-to platform for discovering and ordering the best local meals, snacks, and drinks. Fast delivery, great taste, and a world of options!</p>
-            <div className="flex gap-3 mt-2">
-              <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c]">Fb</a>
-              <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c]">Ig</a>
-              <a href="#" aria-label="Twitter" className="hover:text-[#ff2c2c]">Tw</a>
-            </div>
-          </div>
-          {/* Links */}
-          <div className="flex-1 min-w-[150px]">
-            <h4 className="font-bold text-lg mb-3 text-white">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><a href="/homepage" className="hover:text-[#ff2c2c]">Home</a></li>
-              <li><a href="/auth/cart" className="hover:text-[#ff2c2c]">Cart</a></li>
-              <li><a href="/auth/login" className="hover:text-[#ff2c2c]">Login</a></li>
-              <li><a href="/auth/signin" className="hover:text-[#ff2c2c]">Sign Up</a></li>
-              <li><a href="/auth/quick-order" className="hover:text-[#ff2c2c]">Quick Order</a></li>
-            </ul>
-          </div>
-          {/* Contact */}
-          <div className="flex-1 min-w-[200px]">
-            <h4 className="font-bold text-lg mb-3 text-white">Contact Us</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>Email: <a href="mailto:support@foodie.com" className="hover:text-[#ff2c2c]">support@foodie.com</a></li>
-              <li>Phone: <a href="tel:+1234567890" className="hover:text-[#ff2c2c]">+1 234 567 890</a></li>
-              <li>Address: 123 Foodie Lane, Flavor Town, USA</li>
-            </ul>
-          </div>
-        </div>
-        <div className="w-4/5 mx-auto border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Foodie. All rights reserved.
-        </div>
-      </footer>
+      <Footer />
+
+      {/* Back to Top Button */}
     </div>
   );
 };

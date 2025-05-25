@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import TopHeader from '@/components/TopHeader';
 import Image from 'next/image';
 import { products } from '../../../public/assets/assets';
+import UserHeader from '@/components/UserHeader';
+import Footer from '@/components/Footer';
 
 type CartItem = {
   product: {
@@ -60,7 +62,8 @@ const CartPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <TopHeader />
+      {/* <TopHeader /> */}
+      <UserHeader />
       <section className="w-4/5 mx-auto py-12">
         <h2 className="text-3xl font-bold mb-8 text-[#ff2c2c]">Your Cart</h2>
         {cart.length === 0 ? (
@@ -68,7 +71,7 @@ const CartPage = () => {
             <span>Your cart is empty.</span>
             <button
               className="mt-8 px-6 py-3 bg-[#ff2c2c] text-white rounded-lg font-bold text-lg hover:bg-[#e01b1b] transition"
-              onClick={() => window.location.href = '/homepage'}
+              onClick={() => window.location.href = '/menu'}
             >
               Place Order
             </button>
@@ -106,11 +109,12 @@ const CartPage = () => {
             <div className="md:w-1/3 w-full md:sticky md:top-28 h-fit bg-white rounded-lg shadow p-6 flex flex-col gap-6 self-start">
               <div className="text-lg font-semibold">Total Items: {totalItems}</div>
               <div className="text-2xl font-bold text-[#ff2c2c]">Total: ${totalCost.toFixed(2)}</div>
-              <button className="bg-[#ff2c2c] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[#e01b1b] transition">Checkout</button>
+              <a href="/checkout" className="bg-[#ff2c2c] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[#e01b1b] transition text-center block">Checkout</a>
             </div>
           </div>
         )}
       </section>
+      {/* <Footer /> */}
     </div>
   );
 };
