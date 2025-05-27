@@ -26,7 +26,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({ cartCount = 0, activePage }) =>
         {/* Section 1: Logo */}
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => router.push("/homepage")}> 
           <Image src="/assets/logo.png" alt="Logo" width={40} height={40} className="w-10 h-10 object-contain" />
-          <span className="font-bold text-xl text-[#ff2c2c] hidden sm:inline">Foodie</span>
+          <span className="font-bold text-xl text-[#ff2c2c] hidden sm:inline">Foodie Resto</span>
         </div>
         {/* Section 2: Menu (Desktop) */}
         <nav className="hidden md:flex gap-8 text-base font-medium">

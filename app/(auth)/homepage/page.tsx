@@ -55,7 +55,7 @@ const ClientHome = () => {
       {/* Hero Section */}
       <section className="w-4/5 mx-auto bg-[#fff6f6] py-12 flex flex-col md:flex-row items-center justify-center mb-8 gap-8 md:gap-16">
         <div className="flex-1 flex flex-col items-start md:items-start justify-center max-w-xl px-4">
-          <h1 className="text-4xl font-extrabold text-[#ff2c2c] mb-2">Welcome to Foodie</h1>
+          <h1 className="text-4xl font-extrabold text-[#ff2c2c] mb-2">Welcome to Foodie Resto</h1>
           <p className="text-lg text-gray-700 mb-4 text-left max-w-2xl">
             Discover and order your favorite meals, snacks, and drinks from the best local restaurants. Fast delivery, great taste, and a world of options!
           </p>
@@ -73,7 +73,7 @@ const ClientHome = () => {
         <div className="flex-1 flex flex-col items-start justify-center px-2 order-1 md:order-2">
           <h2 className="text-2xl md:text-3xl font-bold text-[#ff2c2c] mb-4">Our Mission & Impact</h2>
           <p className="text-gray-700 text-base md:text-lg mb-4">
-            <span className="font-semibold text-[#ff2c2c]">Resto</span> is more than just a food delivery platform—it's a movement to empower local businesses, celebrate culinary diversity, and make quality food accessible to everyone. We believe food brings people together, and our mission is to connect communities through the joy of great meals.
+            <span className="font-semibold text-[#ff2c2c]">Foodie Resto</span> is more than just a food delivery platform—it's a movement to empower local businesses, celebrate culinary diversity, and make quality food accessible to everyone. We believe food brings people together, and our mission is to connect communities through the joy of great meals.
           </p>
           <ul className="list-disc pl-5 text-gray-600 text-sm md:text-base mb-4">
             <li>Supporting local restaurants and small businesses to thrive in a digital world</li>
@@ -96,7 +96,7 @@ const ClientHome = () => {
         <div className="flex-1 flex flex-col items-start justify-center px-2 order-2 md:order-1">
           <h2 className="text-2xl md:text-3xl font-bold text-[#ff2c2c] mb-4">About Resto</h2>
           <p className="text-gray-700 text-base md:text-lg mb-4">
-            <span className="font-semibold text-[#ff2c2c]">Resto</span> was founded in 2022 with a vision to revolutionize the way people experience food delivery. Our journey began with a small team of passionate foodies and tech enthusiasts who wanted to make great food accessible, fast, and enjoyable for everyone.
+            <span className="font-semibold text-[#ff2c2c]">Foodie Resto</span> was founded in 2022 with a vision to revolutionize the way people experience food delivery. Our journey began with a small team of passionate foodies and tech enthusiasts who wanted to make great food accessible, fast, and enjoyable for everyone.
           </p>
           <p className="text-gray-700 text-base md:text-lg mb-4">
             Since our launch, we've grown into a vibrant platform connecting thousands of customers with the best local restaurants and chefs. We believe in supporting local businesses, celebrating culinary diversity, and delivering happiness to your doorstep—one meal at a time.

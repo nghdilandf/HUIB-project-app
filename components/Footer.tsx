@@ -6,7 +6,7 @@ const Footer = () => (
           {/* About */}
           <div className="flex-1 min-w-[200px]">
             <div className="flex items-center mb-4">
-              <span className="font-bold text-2xl text-[#ff2c2c] mr-2">🍽️ RESTO</span>
+              <span className="font-bold text-2xl text-[#ff2c2c] mr-2">🍽️FOODIE RESTO</span>
             </div>
             <p className="text-gray-400 mb-4">Foodie is your go-to platform for discovering and ordering the best local meals, snacks, and drinks. Fast delivery, great taste, and a world of options!</p>
             <div className="flex gap-3 mt-2">
@@ -37,7 +37,7 @@ const Footer = () => (
           </div>
         </div>
         <div className="w-4/5 mx-auto border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Foodie. All rights reserved.
+          &copy; {new Date().getFullYear()} Foodie Resto. All rights reserved.
         </div>
       </footer>
 );

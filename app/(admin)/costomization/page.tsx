@@ -68,7 +68,7 @@ const Costomize = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
+    <div className="min-h-screen  py-10 px-4">
       <h1 className="text-3xl font-bold mb-8 text-[#000000]">Site Customization</h1>
       {/* Product Management */}
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6 mb-8 border border-gray-100">
