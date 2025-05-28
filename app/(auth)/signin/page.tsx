@@ -14,6 +14,55 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [focus, setFocus] = useState<{ [key: string]: boolean }>({});
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePassword = (password: string) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{6,}$/.test(password);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    if (!validateEmail(form.email)) {
+      setError('Invalid email format');
+      return;
+    }
+    if (!validatePassword(form.password)) {
+      setError('Password must be at least 6 characters, include a letter and a number');
+      return;
+    }
+    if (form.password !== form.confirm) {
+      setError('Passwords do not match');
+      return;
+    }
+    if (!form.username) {
+      setError('Username is required');
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: form.email,
+          username: form.username,
+          password: form.password,
+          confirm: form.confirm
+        })
+      });
+      const data = await res.json();
+      if (data.success && data.redirect) {
+        window.location.href = data.redirect;
+      } else {
+        setError(data.error || 'Signup failed');
+      }
+    } catch {
+      setError('Server error');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
     setFocus({ ...focus, [e.target.name]: true });
@@ -24,10 +73,6 @@ const SignIn = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert('Sign Up submitted');
-  };
 
   return (
     <div className="min-h-screen flex bg-gray-50 fixed inset-0" style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
@@ -35,6 +80,7 @@ const SignIn = () => {
       <div className="flex-1 flex items-center justify-center sticky top-0 h-screen bg-white z-10">
         <div className="rounded-lg shadow-lg p-8 w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">Create an Account</h2>
+          {error && <div className="text-red-500 text-center mb-2">{error}</div>}
           <form className="space-y-4" onSubmit={handleSubmit}>
             {/* Email */}
             <div className="relative">
@@ -194,11 +240,13 @@ const SignIn = () => {
                 )}
               </button>
             </div>
+            {/* Disable button when loading */}
             <button
               type="submit"
               className="w-full bg-[#ff2c2c] text-white rounded px-4 py-2 font-semibold hover:bg-[#e01b1b] transition"
+              disabled={loading}
             >
-              Sign Up
+              {loading ? 'Signing Up...' : 'Sign Up'}
             </button>
           </form>
           {/* Social login icons below submit */}
