@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => (
   <footer className="w-full bg-gray-900 text-gray-200 pt-12 pb-6 mt-12">
@@ -10,9 +11,9 @@ const Footer = () => (
             </div>
             <p className="text-gray-400 mb-4">Cameroon Flavors is your go-to platform for discovering and ordering the best traditional meals from all ten regions of Cameroon. Fast delivery, authentic taste, and a celebration of our culinary heritage!</p>
             <div className="flex gap-3 mt-2">
-              <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c]">Fb</a>
-              <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c]">Ig</a>
-              <a href="#" aria-label="Twitter" className="hover:text-[#ff2c2c]">Tw</a>
+              <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c] text-2xl"><FaFacebookF /></a>
+              <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c] text-2xl"><FaInstagram /></a>
+              <a href="#" aria-label="Twitter" className="hover:text-[#ff2c2c] text-2xl"><FaTwitter /></a>
             </div>
           </div>
           {/* Links */}
@@ -29,10 +30,17 @@ const Footer = () => (
           <div className="flex-1 min-w-[200px]">
             <h4 className="font-bold text-lg mb-3 text-white">Contact Us</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Email: <a href="mailto:support@cameroonflavors.com" className="hover:text-[#ff2c2c]">support@cameroonflavors.com</a></li>
-              <li>Phone: <a href="tel:+237650000000" className="hover:text-[#ff2c2c]">+237 650 000 000</a></li>
+              <li>Email: <a href="mailto:Ngahdiland@gmail.com" className="hover:text-[#ff2c2c]">support@cameroonflavors.com</a></li>
+              <li>Phone: <a href="tel:+237650000000" className="hover:text-[#ff2c2c]">+237 677 828 170</a></li>
               <li>Address: Yaoundé, Cameroon</li>
             </ul>
+            {/* Working Hours */}
+            <div className="mt-6">
+              <h4 className="font-bold text-lg mb-2 text-white">Working Hours</h4>
+              <ul className="text-gray-400 text-sm space-y-1">
+                <li>Monday - Sunday: 7:00 AM - 10:00 PM</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="w-4/5 mx-auto border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
