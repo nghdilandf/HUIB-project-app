@@ -18,8 +18,19 @@ const paymentOptions = [
   { key: "cash", label: "Cash on Delivery", logo: "/assets/cash_icon.png" },
 ];
 
+// Define cart item type for type safety
+interface CartItem {
+  product: {
+    _id: string;
+    name: string;
+    price: number;
+    image: string[] | string;
+  };
+  quantity: number;
+}
+
 const CheckoutPage = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedPayment, setSelectedPayment] = useState("orange");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
@@ -66,7 +77,7 @@ const CheckoutPage = () => {
               <div className="text-gray-400 text-center py-8">Your cart is empty.</div>
             ) : (
               <div className="flex flex-col gap-4">
-                {cart.map((item: any) => (
+                {cart.map((item: CartItem) => (
                   <div key={item.product._id} className="flex items-center gap-4 border-b pb-2 last:border-b-0">
                     <Image
                       src={Array.isArray(item.product.image) ? item.product.image[0] : item.product.image}
@@ -79,12 +90,12 @@ const CheckoutPage = () => {
                       <div className="font-semibold">{item.product.name}</div>
                       <div className="text-xs text-gray-500">Qty: {item.quantity}</div>
                     </div>
-                    <div className="font-bold text-[#ff2c2c]">${(item.product.price * item.quantity).toFixed(2)}</div>
+                    <div className="font-bold text-[#ff2c2c]">{(item.product.price * item.quantity).toLocaleString()} FCFA</div>
                   </div>
                 ))}
                 <div className="flex justify-between font-bold text-lg mt-4">
                   <span>Total:</span>
-                  <span className="text-[#ff2c2c]">${totalCost.toFixed(2)}</span>
+                  <span className="text-[#ff2c2c]">{totalCost.toLocaleString()} FCFA</span>
                 </div>
               </div>
             )}

@@ -6,9 +6,9 @@ const Footer = () => (
           {/* About */}
           <div className="flex-1 min-w-[200px]">
             <div className="flex items-center mb-4">
-              <span className="font-bold text-2xl text-[#ff2c2c] mr-2">🍽️FOODIE RESTO</span>
+              <span className="font-bold text-2xl text-[#ff2c2c] mr-2">🇨🇲 CAMEROON FLAVORS</span>
             </div>
-            <p className="text-gray-400 mb-4">Foodie is your go-to platform for discovering and ordering the best local meals, snacks, and drinks. Fast delivery, great taste, and a world of options!</p>
+            <p className="text-gray-400 mb-4">Cameroon Flavors is your go-to platform for discovering and ordering the best traditional meals from all ten regions of Cameroon. Fast delivery, authentic taste, and a celebration of our culinary heritage!</p>
             <div className="flex gap-3 mt-2">
               <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c]">Fb</a>
               <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c]">Ig</a>
@@ -22,7 +22,6 @@ const Footer = () => (
               <li><a href="/homepage" className="hover:text-[#ff2c2c]">Home</a></li>
               <li><a href="/auth/cart" className="hover:text-[#ff2c2c]">Cart</a></li>
               <li><a href="/auth/login" className="hover:text-[#ff2c2c]">Login</a></li>
-              <li><a href="/auth/signin" className="hover:text-[#ff2c2c]">Sign Up</a></li>
               <li><a href="/auth/quick-order" className="hover:text-[#ff2c2c]">Quick Order</a></li>
             </ul>
           </div>
@@ -30,9 +29,9 @@ const Footer = () => (
           <div className="flex-1 min-w-[200px]">
             <h4 className="font-bold text-lg mb-3 text-white">Contact Us</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Email: <a href="mailto:support@foodie.com" className="hover:text-[#ff2c2c]">support@foodie.com</a></li>
-              <li>Phone: <a href="tel:+1234567890" className="hover:text-[#ff2c2c]">+1 234 567 890</a></li>
-              <li>Address: 123 Foodie Lane, Flavor Town, USA</li>
+              <li>Email: <a href="mailto:support@cameroonflavors.com" className="hover:text-[#ff2c2c]">support@cameroonflavors.com</a></li>
+              <li>Phone: <a href="tel:+237650000000" className="hover:text-[#ff2c2c]">+237 650 000 000</a></li>
+              <li>Address: Yaoundé, Cameroon</li>
             </ul>
           </div>
         </div>

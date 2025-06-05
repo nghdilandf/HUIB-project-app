@@ -91,7 +91,7 @@ const CartPage = () => {
                   />
                   <div className="flex-1">
                     <div className="font-semibold text-lg">{item.product.name}</div>
-                    <div className="text-[#ff2c2c] font-bold mb-2">${item.product.price}</div>
+                    <div className="text-[#ff2c2c] font-bold mb-2">{item.product.price.toLocaleString()} FCFA</div>
                     <div className="flex items-center gap-2">
                       <button className="px-2 py-1 bg-gray-200 rounded" onClick={() => handleRemoveOne(item.product._id)}>-</button>
                       <span className="font-semibold">{item.quantity}</span>
@@ -99,7 +99,7 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <div className="font-bold text-lg">${(item.product.price * item.quantity).toFixed(2)}</div>
+                    <div className="font-bold text-lg">{(item.product.price * item.quantity).toLocaleString()} FCFA</div>
                     <button className="text-red-500 hover:underline text-sm" onClick={() => handleDelete(item.product._id)}>Remove</button>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ const CartPage = () => {
             {/* Sticky Summary/Checkout */}
             <div className="md:w-1/3 w-full md:sticky md:top-28 h-fit bg-white rounded-lg shadow p-6 flex flex-col gap-6 self-start">
               <div className="text-lg font-semibold">Total Items: {totalItems}</div>
-              <div className="text-2xl font-bold text-[#ff2c2c]">Total: ${totalCost.toFixed(2)}</div>
+              <div className="text-2xl font-bold text-[#ff2c2c]">Total: {totalCost.toLocaleString()} FCFA</div>
               <a href="/checkout" className="bg-[#ff2c2c] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[#e01b1b] transition text-center block">Checkout</a>
             </div>
           </div>

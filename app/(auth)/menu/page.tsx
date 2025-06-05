@@ -6,7 +6,17 @@ import { products } from "../../../public/assets/assets";
 import Footer from "@/components/Footer";
 
 const categories = [
-  "all", "donuts", "burgers", "ice", "poteto", "pizza", "fries", "cake", "chicken", "hot dog"
+  "all",
+  "Adamawa",
+  "Centre",
+  "East",
+  "Far North",
+  "Littoral",
+  "North",
+  "Northwest",
+  "West",
+  "South",
+  "Southwest"
 ];
 
 const MenuPage = () => {
@@ -20,7 +30,7 @@ const MenuPage = () => {
   // Filter and paginate products
   const filteredProducts = products.filter(
     (product: any) =>
-      (selectedCategory === "all" || product.category?.toLowerCase() === selectedCategory) &&
+      (selectedCategory === "all" || product.category === selectedCategory) &&
       (search === "" || product.name.toLowerCase().includes(search.toLowerCase()))
   );
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
@@ -97,7 +107,7 @@ const MenuPage = () => {
                   height={96}
                 />
                 <div className="font-semibold text-lg text-center mb-2">{product.name}</div>
-                <div className="text-[#ff2c2c] font-bold text-lg mb-3">${product.price}</div>
+                <div className="text-[#ff2c2c] font-bold text-lg mb-3">{product.price.toLocaleString()} FCFA</div>
                 <div className="flex w-full justify-between items-center mt-2">
                   <button
                     className={`text-2xl ${cart.find((item) => item.product._id === product._id) ? 'text-[#ff2c2c]' : 'text-gray-400'} transition`}
@@ -160,7 +170,7 @@ const MenuPage = () => {
                         <div className="font-semibold">{item.product.name}</div>
                         <div className="text-xs text-gray-500">Qty: {item.quantity}</div>
                       </div>
-                      <div className="font-bold text-[#ff2c2c]">${(item.product.price * item.quantity).toFixed(2)}</div>
+                      <div className="font-bold text-[#ff2c2c]">{(item.product.price * item.quantity).toLocaleString()} FCFA</div>
                     </div>
                   ))}
                 </div>
@@ -173,7 +183,7 @@ const MenuPage = () => {
               </div>
               <div className="flex justify-between text-lg font-bold">
                 <span>Total:</span>
-                <span className="text-[#ff2c2c]">${totalCost.toFixed(2)}</span>
+                <span className="text-[#ff2c2c]">{totalCost.toLocaleString()} FCFA</span>
               </div>
               <div className="flex gap-2 mt-4">
                 <a href="/cart" className="flex-1 bg-gray-200 text-gray-700 rounded px-4 py-2 text-center font-semibold hover:bg-gray-300 transition">View Cart</a>

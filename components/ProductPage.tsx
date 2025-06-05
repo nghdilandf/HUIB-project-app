@@ -48,7 +48,7 @@ const ProductPage: React.FC<ProductPageProps> = ({
             {product.name}
           </div>
           <div className="text-[#ff2c2c] font-bold mb-2">
-            ${product.price}
+            {product.price.toLocaleString()} FCFA
           </div>
           <button
             className="bg-[#ff2c2c] text-white px-4 py-1 rounded hover:bg-[#e01b1b] transition"
