@@ -31,7 +31,7 @@ const Costomize = () => {
       setProducts([
         ...products,
         {
-          id: Date.now(),
+          id: Math.floor(Math.random() * 1000000000), // Use a random static id instead of Date.now()
           name: newProduct.name,
           price: Number(newProduct.price),
           details: newProduct.details,

@@ -69,7 +69,7 @@ export const products = [
     category: "Adamawa",
     subCategory: "Gbaya, Duru",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -81,7 +81,7 @@ export const products = [
     category: "Adamawa",
     subCategory: "Fulani",
     sizes: ["Pack"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // Centre Region
@@ -94,7 +94,7 @@ export const products = [
     category: "Centre",
     subCategory: "Ewondo, Bassa",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -106,7 +106,7 @@ export const products = [
     category: "Centre",
     subCategory: "Bafia",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // East Region
@@ -119,7 +119,7 @@ export const products = [
     category: "East",
     subCategory: "Maka, Gbaya",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -131,7 +131,7 @@ export const products = [
     category: "East",
     subCategory: "Baka",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // Far North Region
@@ -144,7 +144,7 @@ export const products = [
     category: "Far North",
     subCategory: "Kotoko, Mandara",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -156,7 +156,7 @@ export const products = [
     category: "Far North",
     subCategory: "Fulani",
     sizes: ["Bowl"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // Littoral Region
@@ -169,7 +169,7 @@ export const products = [
     category: "Littoral",
     subCategory: "Duala",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -181,7 +181,7 @@ export const products = [
     category: "Littoral",
     subCategory: "Bakoko",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // North Region
@@ -194,7 +194,7 @@ export const products = [
     category: "North",
     subCategory: "Fulani",
     sizes: ["Bottle"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -206,7 +206,7 @@ export const products = [
     category: "North",
     subCategory: "Toupouri",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // Northwest Region
@@ -219,7 +219,7 @@ export const products = [
     category: "Northwest",
     subCategory: "Bamenda, Kom, Nso",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -231,7 +231,7 @@ export const products = [
     category: "Northwest",
     subCategory: "Kom, Nso",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // West Region
@@ -244,7 +244,7 @@ export const products = [
     category: "West",
     subCategory: "Bamileke",
     sizes: ["Wrap"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -256,7 +256,7 @@ export const products = [
     category: "West",
     subCategory: "Bafut, Bamileke",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // South Region
@@ -269,7 +269,7 @@ export const products = [
     category: "South",
     subCategory: "Bulu, Fang",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -281,7 +281,7 @@ export const products = [
     category: "South",
     subCategory: "Beti",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   },
   // Southwest Region
@@ -294,7 +294,7 @@ export const products = [
     category: "Southwest",
     subCategory: "Bayangi, Bakweri",
     sizes: ["Plate"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: true
   },
   {
@@ -306,7 +306,7 @@ export const products = [
     category: "Southwest",
     subCategory: "Bakweri",
     sizes: ["Wrap"],
-    date: Date.now(),
+    date: "2024-06-19T00:00:00Z",
     bestseller: false
   }
 ];

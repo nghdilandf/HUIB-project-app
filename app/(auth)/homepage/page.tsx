@@ -4,6 +4,7 @@ import TopHeader from '@/components/TopHeader';
 import Image from 'next/image';
 import UserHeader from '@/components/UserHeader';
 import Footer from '@/components/Footer';
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const ClientHome = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -138,9 +139,9 @@ const ClientHome = () => {
             Connect with us on social media for the latest updates, offers, and Cameroonian food inspiration!
           </p>
           <div className="flex gap-4 mt-4">
-            <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c] text-2xl">Fb</a>
-            <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c] text-2xl">Ig</a>
-            <a href="#" aria-label="Twitter" className="hover:text-[#ff2c2c] text-2xl">Tw</a>
+            <a href="#" aria-label="Facebook" className="hover:text-[#ff2c2c] text-2xl"><FaFacebookF /></a>
+            <a href="#" aria-label="Instagram" className="hover:text-[#ff2c2c] text-2xl"><FaInstagram /></a>
+            <a href="#" aria-label="Twitter" className="hover:text-[#ff2c2c] text-2xl"><FaTwitter /></a>
           </div>
         </div>
         <div className="flex-1 flex justify-center mb-6 md:mb-0 order-2 md:order-1">
