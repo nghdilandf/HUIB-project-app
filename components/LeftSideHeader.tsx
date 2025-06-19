@@ -29,17 +29,16 @@ const LeftSideHeader = () => {
 
             return (
               <li key={item.name}>
-                <Link href={item.to} legacyBehavior>
-                  <a
-                    className={`flex items-center hover:border-1 hover:border-[#ff2c2c] w-full px-2 py-2 rounded transition-colors
-                      ${isActive
-                        ? "bg-[#ff2c2c34] text-gray-800 border-1 border-[#ff2c2c]"
-                        : "bg-[#fff] shadow-md shadow-gray-300 hover:bg-[#ff2c2c] hover:text-gray-50"}
-                    `}
-                  >
-                    <span className="mr-3 text-lg">{item.icon}</span>
-                    <span className="text-base">{item.name}</span>
-                  </a>
+                <Link
+                  href={item.to}
+                  className={`flex items-center hover:border-1 hover:border-[#ff2c2c] w-full px-2 py-2 rounded transition-colors
+                    ${isActive
+                      ? "bg-[#ff2c2c34] text-gray-800 border-1 border-[#ff2c2c]"
+                      : "bg-[#fff] shadow-md shadow-gray-300 hover:bg-[#ff2c2c] hover:text-gray-50"}
+                  `}
+                >
+                  <span className="mr-3 text-lg">{item.icon}</span>
+                  <span className="text-base">{item.name}</span>
                 </Link>
               </li>
             );

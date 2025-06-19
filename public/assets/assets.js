@@ -1,59 +1,21 @@
-import p_img1 from './food1.jpg'
-import p_img2_1 from './food2.jpg'
-import p_img2_2 from './food2.jpg'
-import p_img2_3 from './food2.jpg'
-import p_img2_4 from './food2.jpg'
-import p_img3 from './food1.jpg'
-import p_img4 from './food1.jpg'
-import p_img5 from './food1.jpg'
-import p_img6 from './food1.jpg'
-import p_img7 from './food1.jpg'
-import p_img8 from './food1.jpg'
-import p_img9 from './food1.jpg'
-import p_img10 from './food2.jpg'
-import p_img11 from './food2.jpg'
-import p_img12 from './food2.jpg'
-import p_img13 from './food2.jpg'
-import p_img14 from './food2.jpg'
-import p_img15 from './food2.jpg'
-import p_img16 from './food2.jpg'
-import p_img17 from './food2.jpg'
-import p_img18 from './food2.jpg'
-import p_img19 from './food2.jpg'
-import p_img20 from './food2.jpg'
-import p_img21 from './food2.jpg'
-import p_img22 from './food2.jpg'
-import p_img23 from './food2.jpg'
-import p_img24 from './food2.jpg'
-import p_img25 from './food2.jpg'
-import p_img26 from './food2.jpg'
-import p_img27 from './food2.jpg'
-import p_img28 from './food2.jpg'
-import p_img29 from './food2.jpg'
-import p_img30 from './food1.jpg'
-import p_img31 from './food1.jpg'
-import p_img32 from './food1.jpg'
-import p_img33 from './food1.jpg'
-import p_img34 from './food1.jpg'
-import p_img35 from './food1.jpg'
-import p_img36 from './food1.jpg'
-import p_img37 from './food1.jpg'
-import p_img38 from './food1.jpg'
-import p_img39 from './food1.jpg'
-import p_img40 from './food1.jpg'
-import p_img41 from './food1.jpg'
-import p_img42 from './food1.jpg'
-import p_img43 from './food1.jpg'
-import p_img44 from './food1.jpg'
-import p_img45 from './food2.jpg'
-import p_img46 from './food2.jpg'
-import p_img47 from './food2.jpg'
-import p_img48 from './food2.jpg'
-import p_img49 from './food2.jpg'
-import p_img50 from './food2.jpg'
-import p_img51 from './food2.jpg'
-import p_img52 from './food2.jpg'
-
+import Ndole from './Ndolé.jpg';
+import Kilishi from './Kilishi.webp';
+import Eru from './Eru.jpg';
+import Kpwem from './Kpwem.jpg';
+import MbongoTchobi from './Mbongo Tchobi.jpg';
+import Kanda from './Kanda.jpg';
+import FufuAndOkraSoup from './Fufu and Okra Soup.jpg';
+import LaBouillie from './La Bouillie.jpg';
+import DjamaDjama from './Djama Djama.jpg';
+import Kossam from './Kossam.webp';
+import AchuAndYellowSoup from './Achu and Yellow Soup.jpg';
+import CornFufuAndNjamaNjama from './Corn Fufu and Njama Njama.jpg';
+import Koki from './Koki.jpg';
+import TaroAndYellowSauce from './Taro and Yellow Sauce.jpg';
+import Ekwang from './Ekwang.jpg';
+import BongoChobi from './Bongo Chobi.jpg';
+import EruAndWaterfufu from './EruandWaterfufu.jpg';
+import KwacocoBible from './KwacocoBible.jpg';
 
 import logo from './logo.png'
 import hero_img from './hero_img.png'
@@ -103,7 +65,7 @@ export const products = [
     name: "Ndolé",
     description: "A rich stew made with bitter leaves, groundnuts, and meat or fish. Popular among the Gbaya and Duru tribes.",
     price: 2500, // FCFA
-    image: [p_img1],
+    image: [Ndole],
     category: "Adamawa",
     subCategory: "Gbaya, Duru",
     sizes: ["Plate"],
@@ -115,7 +77,7 @@ export const products = [
     name: "Kilishi",
     description: "Spicy dried meat snack, similar to beef jerky. Common among the Fulani.",
     price: 1500,
-    image: [p_img2_1],
+    image: [Kilishi],
     category: "Adamawa",
     subCategory: "Fulani",
     sizes: ["Pack"],
@@ -128,7 +90,7 @@ export const products = [
     name: "Eru",
     description: "A vegetable soup made with eru leaves, waterleaf, and assorted meats. Popular among the Ewondo and Bassa.",
     price: 2000,
-    image: [p_img3],
+    image: [Eru],
     category: "Centre",
     subCategory: "Ewondo, Bassa",
     sizes: ["Plate"],
@@ -140,7 +102,7 @@ export const products = [
     name: "Kpwem",
     description: "Cassava leaves stew, a delicacy of the Bafia tribe.",
     price: 1800,
-    image: [p_img4],
+    image: [Kpwem],
     category: "Centre",
     subCategory: "Bafia",
     sizes: ["Plate"],
@@ -153,7 +115,7 @@ export const products = [
     name: "Mbongo Tchobi",
     description: "Spicy black stew made with fish and local spices. Popular among the Maka and Gbaya.",
     price: 2200,
-    image: [p_img5],
+    image: [MbongoTchobi],
     category: "East",
     subCategory: "Maka, Gbaya",
     sizes: ["Plate"],
@@ -165,7 +127,7 @@ export const products = [
     name: "Kanda",
     description: "Meatballs made from groundnuts and spices, a Baka delicacy.",
     price: 1700,
-    image: [p_img6],
+    image: [Kanda],
     category: "East",
     subCategory: "Baka",
     sizes: ["Plate"],
@@ -178,7 +140,7 @@ export const products = [
     name: "Fufu and Okra Soup",
     description: "Fufu served with okra soup, a staple among the Kotoko and Mandara.",
     price: 1600,
-    image: [p_img7],
+    image: [FufuAndOkraSoup],
     category: "Far North",
     subCategory: "Kotoko, Mandara",
     sizes: ["Plate"],
@@ -190,7 +152,7 @@ export const products = [
     name: "La Bouillie",
     description: "Millet porridge, a breakfast favorite of the Fulani.",
     price: 800,
-    image: [p_img8],
+    image: [LaBouillie],
     category: "Far North",
     subCategory: "Fulani",
     sizes: ["Bowl"],
@@ -203,7 +165,7 @@ export const products = [
     name: "Ndolé",
     description: "Bitterleaf and groundnut stew, a signature dish of the Duala tribe.",
     price: 2500,
-    image: [p_img9],
+    image: [Ndole],
     category: "Littoral",
     subCategory: "Duala",
     sizes: ["Plate"],
@@ -215,7 +177,7 @@ export const products = [
     name: "Mbongo Tchobi",
     description: "Black stew with fish, a favorite among the Bakoko.",
     price: 2200,
-    image: [p_img10],
+    image: [MbongoTchobi],
     category: "Littoral",
     subCategory: "Bakoko",
     sizes: ["Plate"],
@@ -228,7 +190,7 @@ export const products = [
     name: "Kossam",
     description: "Fermented milk, a Fulani specialty.",
     price: 1000,
-    image: [p_img11],
+    image: [Kossam],
     category: "North",
     subCategory: "Fulani",
     sizes: ["Bottle"],
@@ -240,7 +202,7 @@ export const products = [
     name: "Djama Djama",
     description: "Huckleberry leaves cooked with groundnut paste, enjoyed by the Toupouri.",
     price: 1500,
-    image: [p_img12],
+    image: [DjamaDjama],
     category: "North",
     subCategory: "Toupouri",
     sizes: ["Plate"],
@@ -253,7 +215,7 @@ export const products = [
     name: "Achu and Yellow Soup",
     description: "Pounded cocoyams with spicy yellow soup, a traditional meal of the Bamenda Grassfields tribes.",
     price: 3000,
-    image: [p_img13],
+    image: [AchuAndYellowSoup],
     category: "Northwest",
     subCategory: "Bamenda, Kom, Nso",
     sizes: ["Plate"],
@@ -265,7 +227,7 @@ export const products = [
     name: "Corn Fufu and Njama Njama",
     description: "Corn fufu served with huckleberry leaves, a Kom and Nso favorite.",
     price: 1800,
-    image: [p_img14],
+    image: [CornFufuAndNjamaNjama],
     category: "Northwest",
     subCategory: "Kom, Nso",
     sizes: ["Plate"],
@@ -278,7 +240,7 @@ export const products = [
     name: "Koki",
     description: "Steamed black-eyed pea pudding, a Bamileke delicacy.",
     price: 2000,
-    image: [p_img15],
+    image: [Koki],
     category: "West",
     subCategory: "Bamileke",
     sizes: ["Wrap"],
@@ -290,7 +252,7 @@ export const products = [
     name: "Taro and Yellow Sauce",
     description: "Taro root served with spicy yellow sauce, a Bafut and Bamileke specialty.",
     price: 2500,
-    image: [p_img16],
+    image: [TaroAndYellowSauce],
     category: "West",
     subCategory: "Bafut, Bamileke",
     sizes: ["Plate"],
@@ -303,7 +265,7 @@ export const products = [
     name: "Ekwang",
     description: "Grated cocoyams wrapped in leaves and cooked with palm oil, a Bulu and Fang delicacy.",
     price: 2200,
-    image: [p_img17],
+    image: [Ekwang],
     category: "South",
     subCategory: "Bulu, Fang",
     sizes: ["Plate"],
@@ -315,7 +277,7 @@ export const products = [
     name: "Bongo Chobi",
     description: "Spicy black sauce with fish, a Beti favorite.",
     price: 2100,
-    image: [p_img18],
+    image: [BongoChobi],
     category: "South",
     subCategory: "Beti",
     sizes: ["Plate"],
@@ -328,7 +290,7 @@ export const products = [
     name: "Eru and Waterfufu",
     description: "Eru leaves cooked with waterleaf and served with waterfufu, a Bayangi and Bakweri specialty.",
     price: 2500,
-    image: [p_img19],
+    image: [EruAndWaterfufu],
     category: "Southwest",
     subCategory: "Bayangi, Bakweri",
     sizes: ["Plate"],
@@ -340,7 +302,7 @@ export const products = [
     name: "Kwacoco Bible",
     description: "Grated cocoyam mixed with fish and spices, wrapped in leaves. Popular among the Bakweri.",
     price: 2000,
-    image: [p_img20],
+    image: [KwacocoBible],
     category: "Southwest",
     subCategory: "Bakweri",
     sizes: ["Wrap"],

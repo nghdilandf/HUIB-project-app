@@ -13,14 +13,16 @@ const Home = () => {
   const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
   const paginatedProducts = products.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE);
 
-  // Remove category state and UI
-  // Add dashboard edit options
+  // Dashboard modal/section state
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  // Dashboard Edit Options with handlers
   const dashboardOptions = [
-    { label: 'Manage Products', action: () => {} },
-    { label: 'Manage Orders', action: () => {} },
-    { label: 'Manage Users', action: () => {} },
-    { label: 'Site Settings', action: () => {} },
-    { label: 'View Analytics', action: () => {} },
+    { label: 'Manage Products', action: () => setActiveSection('products') },
+    { label: 'Manage Orders', action: () => setActiveSection('orders') },
+    { label: 'Manage Users', action: () => setActiveSection('users') },
+    { label: 'Site Settings', action: () => setActiveSection('settings') },
+    { label: 'View Analytics', action: () => setActiveSection('analytics') },
   ];
 
   // Product editing state
@@ -79,6 +81,109 @@ const Home = () => {
             </button>
           ))}
         </div>
+        {/* Dashboard Sections */}
+        {activeSection === 'products' && (
+          <div className="mb-8 p-6 bg-white rounded shadow border border-gray-200">
+            <h3 className="text-xl font-bold mb-4">Manage Products</h3>
+            <p>Here you can add, edit, or delete products. (Demo: Use the product list below.)</p>
+            <button className="mt-2 text-[#ff2c2c] underline" onClick={() => setActiveSection(null)}>Close</button>
+          </div>
+        )}
+        {activeSection === 'orders' && (
+          <div className="mb-8 p-6 bg-white rounded shadow border border-gray-200">
+            <h3 className="text-xl font-bold mb-4">Manage Orders</h3>
+            <table className="w-full text-left mb-4">
+              <thead>
+                <tr className="border-b">
+                  <th className="py-2">Order ID</th>
+                  <th className="py-2">Customer</th>
+                  <th className="py-2">Status</th>
+                  <th className="py-2">Total</th>
+                  <th className="py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#1001</td>
+                  <td>Jane Doe</td>
+                  <td><span className="bg-yellow-200 text-yellow-800 px-2 py-1 rounded">Pending</span></td>
+                  <td>8,000 FCFA</td>
+                  <td><button className="bg-green-500 text-white px-2 py-1 rounded">Mark as Complete</button></td>
+                </tr>
+                <tr>
+                  <td>#1002</td>
+                  <td>John Smith</td>
+                  <td><span className="bg-green-200 text-green-800 px-2 py-1 rounded">Completed</span></td>
+                  <td>5,500 FCFA</td>
+                  <td><button className="bg-gray-400 text-white px-2 py-1 rounded">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <button className="mt-2 text-[#ff2c2c] underline" onClick={() => setActiveSection(null)}>Close</button>
+          </div>
+        )}
+        {activeSection === 'users' && (
+          <div className="mb-8 p-6 bg-white rounded shadow border border-gray-200">
+            <h3 className="text-xl font-bold mb-4">Manage Users</h3>
+            <table className="w-full text-left mb-4">
+              <thead>
+                <tr className="border-b">
+                  <th className="py-2">User</th>
+                  <th className="py-2">Email</th>
+                  <th className="py-2">Role</th>
+                  <th className="py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jane Doe</td>
+                  <td>jane@example.com</td>
+                  <td>User</td>
+                  <td><button className="bg-blue-500 text-white px-2 py-1 rounded">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>John Smith</td>
+                  <td>john@example.com</td>
+                  <td>Admin</td>
+                  <td><button className="bg-red-500 text-white px-2 py-1 rounded">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <button className="mt-2 text-[#ff2c2c] underline" onClick={() => setActiveSection(null)}>Close</button>
+          </div>
+        )}
+        {activeSection === 'settings' && (
+          <div className="mb-8 p-6 bg-white rounded shadow border border-gray-200">
+            <h3 className="text-xl font-bold mb-4">Site Settings</h3>
+            <form className="flex flex-col gap-4 mb-4">
+              <div>
+                <label className="block font-semibold mb-1">Site Title</label>
+                <input type="text" className="border rounded px-3 py-2 w-full" defaultValue="Cameroon Flavors" />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Enable Quick Order</label>
+                <input type="checkbox" className="ml-2" defaultChecked />
+              </div>
+              <div>
+                <label className="block font-semibold mb-1">Delivery Fee (FCFA)</label>
+                <input type="number" className="border rounded px-3 py-2 w-full" defaultValue={500} />
+              </div>
+              <button className="bg-[#ff2c2c] text-white px-4 py-2 rounded font-bold mt-2 w-fit">Save Settings</button>
+            </form>
+            <button className="mt-2 text-[#ff2c2c] underline" onClick={() => setActiveSection(null)}>Close</button>
+          </div>
+        )}
+        {activeSection === 'analytics' && (
+          <div className="mb-8 p-6 bg-white rounded shadow border border-gray-200">
+            <h3 className="text-xl font-bold mb-4">View Analytics</h3>
+            <div className="mb-4">
+              <div className="font-semibold">Total Orders: <span className="text-[#ff2c2c]">120</span></div>
+              <div className="font-semibold">Total Users: <span className="text-[#ff2c2c]">45</span></div>
+              <div className="font-semibold">Total Revenue: <span className="text-[#ff2c2c]">1,200,000 FCFA</span></div>
+            </div>
+            <button className="mt-2 text-[#ff2c2c] underline" onClick={() => setActiveSection(null)}>Close</button>
+          </div>
+        )}
         {/* Editable Product List */}
         <div className="flex flex-wrap gap-6">
           {paginatedProducts.map((product) => (
@@ -92,6 +197,15 @@ const Home = () => {
               />
               {editingProduct && editingProduct._id === product._id ? (
                 <>
+                  {editForm.image && editForm.image.trim() !== '' && (
+                    <Image
+                      src={editForm.image}
+                      alt={editForm.name}
+                      width={96}
+                      height={96}
+                      className="w-24 h-24 object-cover rounded mb-2 border"
+                    />
+                  )}
                   <input
                     className="border rounded px-2 py-1 mb-2 w-full"
                     name="name"
@@ -119,7 +233,7 @@ const Home = () => {
               ) : (
                 <>
                   <div className="font-semibold text-lg text-center mb-2">{product.name}</div>
-                  <div className="text-[#ff2c2c] font-bold mb-2">${product.price}</div>
+                  <div className="text-[#ff2c2c] font-bold mb-2">{product.price.toLocaleString()} FCFA</div>
                   <div className="flex gap-2">
                     <button className="bg-blue-500 text-white px-3 py-1 rounded" onClick={() => handleEditClick(product)}>Edit</button>
                     <button className="bg-red-500 text-white px-3 py-1 rounded" onClick={() => handleDelete(product._id)}>Delete</button>
@@ -153,19 +267,19 @@ const Home = () => {
         <div className="bg-white rounded-xl border border-gray-200 shadow p-6 w-full flex flex-col items-center">
           <AdminProfile />
         </div>
-        {/* Back to Top Button */}
-        {showTopBtn && (
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="mt-8 bg-[#ff2c2c] text-white rounded-full p-3 shadow-lg hover:bg-[#e01b1b] transition z-50"
-            aria-label="Back to top"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
-        )}
       </aside>
+      {/* Floating Back to Top Button */}
+      {showTopBtn && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-8 right-8 bg-[#ff2c2c] text-white rounded-full p-4 shadow-lg hover:bg-[#e01b1b] transition z-50"
+          aria-label="Back to top"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }
