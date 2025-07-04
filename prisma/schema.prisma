@@ -16,6 +16,9 @@ model User {
   username    String
   password    String
   role        String   // 'user' | 'admin'
+  adminCode   String?  // Only for admin users
+  town        String?
+  city        String?
   orders      Order[]
   reviews     Review[]
   messages    Message[]

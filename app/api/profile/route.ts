@@ -1,22 +1,38 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
-const userDataPath = path.join(process.cwd(), 'userdata.json');
+// Get user profile by ID (GET)
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get('id');
+  if (!id) {
+    return NextResponse.json({ error: 'Missing user id' }, { status: 400 });
+  }
+  const user = await prisma.user.findUnique({
+    where: { id: Number(id) },
+    select: { id: true, email: true, username: true, role: true, createdAt: true, updatedAt: true },
+  });
+  if (!user) {
+    return NextResponse.json({ error: 'User not found' }, { status: 404 });
+  }
+  return NextResponse.json({ user });
+}
 
-export async function POST(req: Request) {
-  const body = await req.json();
-  const { email, ...rest } = body;
-  let users = [];
-  if (fs.existsSync(userDataPath)) {
-    users = JSON.parse(fs.readFileSync(userDataPath, 'utf-8'));
+// Update user profile (PATCH)
+export async function PATCH(req: NextRequest) {
+  const { id, email, username, town, city } = await req.json();
+  if (!id) {
+    return NextResponse.json({ error: 'Missing user id' }, { status: 400 });
   }
-  // Update user by email
-  const idx = users.findIndex((u: any) => u.email === email);
-  if (idx !== -1) {
-    users[idx] = { ...users[idx], ...rest, email };
-    fs.writeFileSync(userDataPath, JSON.stringify(users, null, 2));
-    return NextResponse.json({ success: true });
-  }
-  return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 });
+  const user = await prisma.user.update({
+    where: { id: Number(id) },
+    data: {
+      email,
+      username,
+      ...(town !== undefined && { town }),
+      ...(city !== undefined && { city })
+    },
+    select: { id: true, email: true, username: true, role: true, createdAt: true, updatedAt: true, town: true, city: true },
+  });
+  return NextResponse.json({ user });
 }

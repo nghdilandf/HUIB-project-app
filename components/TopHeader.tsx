@@ -20,8 +20,9 @@ const TopHeader: React.FC<TopHeaderProps> = ({ cartCount = 0 }) => {
   };
 
   const handleLogout = () => {
-    // Add your logout logic here
-    alert("Logout clicked");
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userData');
+    window.location.href = '/login';
     setProfileOpen(false);
   };
 

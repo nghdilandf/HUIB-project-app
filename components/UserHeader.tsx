@@ -24,7 +24,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({ cartCount = 0, activePage }) =>
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userData');
-    router.push('/login');
+    window.location.href = '/login';
   };
 
   return (

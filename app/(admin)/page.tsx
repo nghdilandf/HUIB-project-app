@@ -307,6 +307,11 @@ function AdminProfile() {
     setEditForm(profile);
     setEditing(false);
   };
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userData');
+    window.location.href = '/login';
+  };
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -344,6 +349,9 @@ function AdminProfile() {
           <div className="text-xs text-[#ff2c2c] font-semibold mb-2">{profile.role}</div>
           <button className="bg-blue-500 text-white px-3 py-1 rounded mt-2" onClick={() => setEditing(true)}>
             Edit Profile
+          </button>
+          <button className="bg-red-500 text-white px-3 py-1 rounded mt-2" onClick={handleLogout}>
+            Logout
           </button>
         </>
       )}

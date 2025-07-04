@@ -37,24 +37,13 @@ const Login = () => {
     setError(null);
     if (authMode === 'login') {
       // Login logic
-      if (role === 'admin') {
-        if (authForm.adminCode !== '123487654') {
-          setError('Invalid admin code');
-          return;
-        }
-        if (authForm.email !== 'fonyuydiland@gmail.com' || authForm.password !== 'ElNgah@50') {
-          setError('Invalid admin credentials');
-          return;
-        }
-      } else {
-        if (!validateEmail(authForm.email)) {
-          setError('Invalid email format');
-          return;
-        }
-        if (!validatePassword(authForm.password)) {
-          setError('Password must be at least 6 characters, include a letter and a number');
-          return;
-        }
+      if (!validateEmail(authForm.email)) {
+        setError('Invalid email format');
+        return;
+      }
+      if (!validatePassword(authForm.password)) {
+        setError('Password must be at least 6 characters, include a letter and a number');
+        return;
       }
       setLoading(true);
       try {
@@ -63,24 +52,13 @@ const Login = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email: authForm.email,
-            password: authForm.password,
-            adminCode: authForm.adminCode
+            password: authForm.password
           })
         });
         const data = await res.json();
-        if (data.success && data.redirect) {
-          // Set user as active in localStorage
+        if (data.user && data.redirect) {
           localStorage.setItem('isLoggedIn', 'true');
-          // Save user data for profile page
-          if (role === 'client' && data.user) {
-            localStorage.setItem('userData', JSON.stringify(data.user));
-          } else if (role === 'admin') {
-            localStorage.setItem('userData', JSON.stringify({
-              email: authForm.email,
-              username: 'dilandfonyuy',
-              role: 'admin',
-            }));
-          }
+          localStorage.setItem('userData', JSON.stringify(data.user));
           window.location.href = data.redirect;
         } else {
           setError(data.error || 'Login failed');
@@ -140,9 +118,10 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-gray-50 fixed inset-0" style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
-      <div className="flex-1 flex items-center justify-center sticky top-0 h-screen bg-white z-10">
-        <div className="rounded-lg shadow-lg p-8 w-full max-w-md bg-white">
+    <div className="min-h-screen flex flex-col md:flex-row bg-gray-50 fixed inset-0" style={{ top: 0, left: 0, right: 0, bottom: 0 }}>
+      {/* Form Section */}
+      <div className="w-full md:w-1/2 flex items-center justify-center h-auto md:h-screen bg-white z-10 p-4 md:p-0">
+        <div className="rounded-lg shadow-lg p-4 sm:p-8 w-full max-w-md bg-white">
           <div className="flex justify-center mb-6">
             <h2 className="text-2xl font-bold text-[#ff2c2c]">{authMode === 'login' ? 'Sign In' : 'Sign Up'}</h2>
           </div>
@@ -487,18 +466,18 @@ const Login = () => {
           </form>
         </div>
       </div>
-      {/* Right: Welcome Section */}
-      <div className="flex-1 flex items-center justify-center sticky top-0 h-screen bg-[#fff6f6] z-0">
-        <div className="max-w-md text-center px-8">
-          <h1 className="text-4xl font-extrabold text-[#ff2c2c] mb-4">Welcome to Foodie</h1>
-          <p className="text-lg text-gray-700 mb-6">
+      {/* Welcome Section */}
+      <div className="w-full md:w-1/2 flex items-center justify-center h-64 md:h-screen bg-[#fff6f6] z-0 p-4 md:p-0">
+        <div className="max-w-md text-center px-2 sm:px-8">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#ff2c2c] mb-4">Welcome to Foodie</h1>
+          <p className="text-base sm:text-lg text-gray-700 mb-6">
             Discover the best food in town! Foodie brings you a wide variety of delicious meals, snacks, and drinks from your favorite local restaurants. Order online, enjoy fast delivery, and experience the taste of happiness.
           </p>
           <div className="flex justify-center">
             <img
               src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
               alt="Foodie Restaurant"
-              className="rounded-xl shadow-lg w-64 h-40 object-cover"
+              className="rounded-xl shadow-lg w-40 h-28 sm:w-64 sm:h-40 object-cover"
             />
           </div>
         </div>

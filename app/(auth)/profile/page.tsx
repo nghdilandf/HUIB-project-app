@@ -29,7 +29,12 @@ function getUserFromStorage() {
 
 const ProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
-  const [user, setUser] = useState(() => getUserFromStorage() || mockUser);
+  const [user, setUser] = useState(mockUser);
+  // On mount, update user from localStorage if available
+  useEffect(() => {
+    const stored = getUserFromStorage();
+    if (stored) setUser(stored);
+  }, []);
   const [form, setForm] = useState(user);
   const [uploading, setUploading] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
@@ -89,7 +94,13 @@ const ProfilePage = () => {
         {/* Profile Card */}
         <div className="bg-white rounded-xl shadow p-8 flex flex-col items-center gap-6 md:w-1/2">
           <div className="relative">
-            <Image src={user.avatar} alt="Profile" width={100} height={100} className="rounded-full object-cover w-24 h-24 border-4 border-[#ff2c2c]" />
+            {user.avatar ? (
+              <Image src={user.avatar} alt="Profile" width={100} height={100} className="rounded-full object-cover w-24 h-24 border-4 border-[#ff2c2c]" />
+            ) : (
+              <div className="rounded-full object-cover w-24 h-24 border-4 border-[#ff2c2c] bg-gray-200 flex items-center justify-center text-3xl text-gray-400">
+                <span>?</span>
+              </div>
+            )}
             <span className="absolute bottom-0 right-0 bg-[#ff2c2c] text-white text-xs px-2 py-0.5 rounded-full">{editMode ? "Edit" : "User"}</span>
           </div>
           {!editMode ? (
